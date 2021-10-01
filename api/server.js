@@ -1,7 +1,7 @@
 const express = require('express');
 
 const projectsRouter = require('./projects/projects-router');
-// const actionsRouter = require('./actions/actions-router');
+const actionsRouter = require('./actions/actions-router');
 
 const server = express();
 
@@ -13,7 +13,7 @@ server.use(express.json());
 // Do NOT `server.listen()` inside this file!
 
 server.use('/api/projects', projectsRouter);
-// server.use('/api/actions', actionsRouter);
+server.use('/api/actions', actionsRouter);
 
 server.use('*', (req, res) => {
   res.status(404).json({

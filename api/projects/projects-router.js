@@ -32,7 +32,7 @@ router.post('/', validateProject, (req, res, next) => {
 // .put()
 
 // router.put('/:id', validateProjectId, validateProject, (req, res, next) => {
-//   Project.update(req.params.id, { name: req.name, description: req.description, completed: req.completed })
+//   Project.update({ name: req.name, description: req.description, completed: req.completed })
 //     .then(updatedProject => {
 //       res.json(updatedProject)
 //     })
