@@ -6,7 +6,7 @@ const validateProjectId = async (req, res, next) => {
     const project = await Project.get(req.params.id)
     if (!project) {
       res.status(404).json({
-        message: ''
+        message: 'the project you are looking for with that ID does not exist'
       })
     } else {
       req.project = project
@@ -14,7 +14,7 @@ const validateProjectId = async (req, res, next) => {
     }
   } catch (err) {
     res.status(500).json({
-      message: '',
+      message: 'there seems to be an issue with finding the project?',
       err: err.message,
       stack: err.stack
     })
@@ -25,7 +25,7 @@ const validateProject = (req, res, next) => {
   const { name, description, completed } = req.body
   if (!name || !description || !completed) {
     res.status(400).json({
-      message: ''
+      message: 'You seem to be missing the required input fields'
     })
   } else {
     req.name = name
