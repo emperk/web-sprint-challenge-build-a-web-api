@@ -29,15 +29,15 @@ router.post('/', validateProject, (req, res, next) => {
     .catch(next)
 })
 
-// .put()
+// .put() ***
 
-// router.put('/:id', validateProjectId, validateProject, (req, res, next) => {
-//   Project.update({ name: req.name, description: req.description, completed: req.completed })
-//     .then(updatedProject => {
-//       res.json(updatedProject)
-//     })
-//     .catch(next)
-// })
+router.put('/:id', validateProjectId, validateProject, (req, res, next) => {
+  Project.update({ name: req.name, description: req.description, completed: req.completed })
+    .then(updatedProject => {
+      res.json(updatedProject)
+    })
+    .catch(next)
+})
 
 // .delete()
 

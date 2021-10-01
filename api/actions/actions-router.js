@@ -1,6 +1,6 @@
 // Write your "actions" router here!
 const express = require('express');
-const { validateActionId } = require('./actions-middleware');
+const { validateActionId, validateAction } = require('./actions-middleware');
 const Action = require('./actions-model');
 
 const router = express.Router();
@@ -19,6 +19,35 @@ router.get('/:id', validateActionId, (req, res, next) => {
   res.json(req.action);
 })
 
-// .post()
+// .post() ***
+
+router.post('/', validateAction, (req, res, next) => {
+  Action.insert({ description: req.description, notes: req.notes, completed: req.completed })
+    .then(newAction => {
+      res.status(201).json(newAction)
+    })
+    .catch(next)
+})
+
+// .put() ***
+
+router.put('/:id', validateActionId, validateAction, (req, res, next) => {
+  Action.update({ description: req.description, notes: req.notes, completed: req.completed })
+    .then(updatedAction => {
+      res.json(updatedAction)
+    })
+    .catch(next)
+})
+
+// .delete()
+
+router.delete('/:id', validateActionId, async (req, res, next) => {
+  try {
+    await Action.remove(req.params.id)
+    res.json(req.action)
+  } catch (err) {
+    next(err)
+  }
+})
 
 module.exports = router;
